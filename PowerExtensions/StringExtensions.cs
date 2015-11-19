@@ -64,6 +64,11 @@ namespace PowerExtensions
             return sb.ToString();
         }
 
+        public static string Format(this string format, params object[] args)
+        {
+            return string.Format(format, args);
+        }
+
         public static string RemoveWhiteSpaces(this string str)
         {
             StringBuilder result = new StringBuilder();
