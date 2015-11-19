@@ -10,7 +10,7 @@ namespace PowerExtensions
         /// <param name="xml">XML</param>
         /// <param name="anotherXml">Another XML</param>
         /// <returns></returns>
-        public static string MergeXmls(this string xml, string anotherXml)
+        public static string AppendXml(this string xml, string anotherXml)
         {
             if (string.IsNullOrEmpty(anotherXml))
                 return xml;
