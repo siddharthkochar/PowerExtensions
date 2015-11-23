@@ -17,6 +17,9 @@ namespace PowerExtensions
 
         public static bool ContainsAny(this string str, char[] characters)
         {
+            if (str.IsNullOrEmpty())
+                return false;
+
             foreach (char character in characters)
             {
                 if (str.Contains(character.ToString()))
@@ -29,6 +32,9 @@ namespace PowerExtensions
 
         public static bool ContainsAny(this string str, char[] characters, StringComparison comparisonType)
         {
+            if (str.IsNullOrEmpty())
+                return false;
+
             foreach (char character in characters)
             {
                 if (str.Contains(character.ToString(), comparisonType))
