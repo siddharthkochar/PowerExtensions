@@ -29,5 +29,31 @@ namespace PowerExtensions
 
             return documentA.InnerXml;
         }
+
+        public static string AppendXmls(this string baseXml, params string[] xmls)
+        {
+            if (baseXml.IsNullOrEmpty() || xmls == null || xmls.Length < 1)
+                return baseXml;
+
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(baseXml);
+
+            foreach (var xml in xmls)
+            {
+                var docs = new XmlDocument();
+                docs.LoadXml(xml);
+
+                if (docs.DocumentElement == null || docs.DocumentElement.ChildNodes == null)
+                    continue;
+
+                foreach (XmlNode node in docs.DocumentElement.ChildNodes)
+                {
+                    XmlNode imported = xmlDoc.ImportNode(node, true);
+                    xmlDoc.DocumentElement.AppendChild(imported);
+                }
+            }
+
+            return xmlDoc.InnerXml;
+        }
     }
 }
