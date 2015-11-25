@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PowerExtensions
@@ -15,7 +16,8 @@ namespace PowerExtensions
         /// <returns></returns>
         public static bool IsValid<T>(this T source)
         {
-            if (null == source) return false;
+            if (null == source)
+                throw new ArgumentNullException();
 
             var context = new ValidationContext(source);
             var results = new List<ValidationResult>();
@@ -32,6 +34,9 @@ namespace PowerExtensions
         /// <returns></returns>
         public static List<ValidationResult> ValidationResults<T>(this T source)
         {
+            if (null == source)
+                throw new ArgumentNullException();
+
             return Errors;
         }
     }
