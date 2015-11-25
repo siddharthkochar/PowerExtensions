@@ -7,8 +7,16 @@ namespace PowerExtensions
     {
         private static List<ValidationResult> Errors { get; set; }
 
+        /// <summary>
+        /// Validates classes using attribute validation
+        /// </summary>
+        /// <typeparam name="T">Type of the class</typeparam>
+        /// <param name="source">Class to validate</param>
+        /// <returns></returns>
         public static bool IsValid<T>(this T source)
         {
+            if (null == source) return false;
+
             var context = new ValidationContext(source);
             var results = new List<ValidationResult>();
             var isValid = Validator.TryValidateObject(source, context, results, true);
@@ -16,6 +24,12 @@ namespace PowerExtensions
             return isValid;
         }
 
+        /// <summary>
+        /// Validation results
+        /// </summary>
+        /// <typeparam name="T">Type of the class</typeparam>
+        /// <param name="source">Validation result for the class</param>
+        /// <returns></returns>
         public static List<ValidationResult> ValidationResults<T>(this T source)
         {
             return Errors;
